@@ -1,0 +1,83 @@
+@startuml ClassDiagram
+
+package UserModels {
+    class User{
+        - username: String
+        - email: String
+        - passwordHash: String
+        + User(username: String, email: String, passwordHash: String) 
+    }
+
+    Customer --|> User
+    class Customer{
+        -reservations: List<Reservation>
+    }
+
+    Trainer --|> User
+    class Trainer {
+        specializations: List<Sport>
+        classes: List<GroupReservation>
+    }
+}
+
+package SportsCenterModels {
+    class SportsCenter {
+        -centerId: Int
+        -name: String
+        -location: String
+        -venues: List<Venue>
+        -workingHours: WorkingHours
+    }
+    SportsCenter --* Venue
+    SportsCenter --* Sport
+    SportsCenter --* Location
+
+    class Venue {
+        venueId: Int
+        sport: Sport
+        capacity: Int
+    }
+
+    class Sport {
+        sportType: Sport
+        isTeamSport: Bool
+    }
+    Sport --* SportType
+
+    enum SportType {
+        FOOTBALL
+        BASKETBALL
+        TENNIS
+        YOGA
+        WEIGHT_TRAINING
+    }
+}
+
+package ReservationModels{
+    class Reservation {
+        -reservationId: Int
+        -sportsCenter: SportCenter
+        -venue: Venue
+        -owner: Customer
+        -date: Date
+        -startTime: Time
+        -endTime: Time
+        -isPublic: Bool
+    }
+
+    GroupReservation --|> Reservation
+    class GroupReservation {
+        participants: List<User>
+        maxUsers: Int
+    }
+}
+
+Customer -up-* Reservation
+Trainer -up-* GroupReservation
+Reservation --* Venue
+Reservation -up-* SportsCenter
+
+
+
+
+@enduml

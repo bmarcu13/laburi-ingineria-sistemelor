@@ -1,0 +1,17 @@
+@startuml Signup
+
+start
+skinparam conditionStyle diamond
+repeat
+    :Access create account page;
+    :Enter first name;
+    :Enter last name;
+    :Enter email;
+    :Enter password;
+    :Enter password confirmation;
+    :Validate fields;
+repeatwhile (fields with errors exist) 
+->all fields valid;
+stop
+
+@enduml

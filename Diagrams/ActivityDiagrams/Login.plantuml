@@ -1,0 +1,14 @@
+@startuml Login
+
+start
+:Access login page;
+:Enter user name;
+repeat
+    :Enter password;
+    :Press submit button;
+repeat while (Incorrect password?) is (yes)
+->no;
+
+end
+
+@enduml

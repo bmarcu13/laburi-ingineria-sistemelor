@@ -1,0 +1,15 @@
+@startuml MakeTrainerBooking
+
+start
+split
+    :Search for trainer using\nthe search function;
+split again
+    :Select sport center;
+    :Select sport;
+end split
+:Select trainer;
+:Select time and date;
+:Make booking;
+stop
+
+@enduml

@@ -1,0 +1,25 @@
+@startuml DeploymentDiagram
+
+node Client [
+    <b>Client</b>
+    --
+    Running on the user's 
+    computer or mobile device
+]
+
+cloud Cloud [
+    <b>Backend</b>
+    --
+    The backend application 
+    running on the server
+]
+
+database "**Database**" as Db {
+    artifact PlatformDB.sql
+}
+
+Client <--> Cloud : HTTP 
+Cloud <--> Db : JDBC
+
+
+@enduml

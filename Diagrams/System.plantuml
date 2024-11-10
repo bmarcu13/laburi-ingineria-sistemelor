@@ -1,0 +1,19 @@
+@startuml System
+
+actor Utilizator
+component "Substrat aplicație web" as webappLayer
+node Server [
+    Server
+    ---
+    Tratare apeluri API
+] 
+database "Bază de date" as db
+
+
+Utilizator --> webappLayer : "Operații CRUD"
+webappLayer --> Server : "Apeluri API"
+Server --> webappLayer
+Server --> db : "Stocarea datelor"
+db --> Server : "Accesarea datelor"
+
+@enduml

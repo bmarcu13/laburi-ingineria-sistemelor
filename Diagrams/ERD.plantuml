@@ -1,0 +1,57 @@
+@startuml
+
+skinparam Linetype ortho
+
+entity Users{
+    *username: text
+    --
+    *email: text
+    *password_hash: text
+    *regular_user: boolean
+}
+
+entity Sports_Centers {
+    *sports_center_id: number <<generated>>
+    --
+    *name: text
+    *address: text
+    *opening_hour: time
+    *closing_hour: time
+}
+
+entity Venues {
+    *venue_id: number <<generated>>
+    --
+    *sport_center_id: number <<FK>>
+    *sport: text
+    capacity: number
+}
+
+entity Reservations {
+    *reservation_id: number <<generated>>
+    --
+    *venue_id: number <<FK>>
+    *user_id: number <<FK>> 
+    *date: date
+    *start_time: time
+    *end_time: time
+    *is_public: boolean
+    max_participants: number
+}
+
+entity Reservation_Participants {
+    *reservation_participants_id: number <<generated>>
+    --
+    *reservation_id: number <<FK>>
+    *user_id: number <<FK>>
+}
+
+Sports_Centers --|{ Venues : Encapsulates
+Reservations }|-- Venues : Held at
+Users --o{ Reservations : Makes
+Users --o{ Reservation_Participants : Participates
+Reservations --o{ Reservation_Participants : Has
+
+
+
+@enduml

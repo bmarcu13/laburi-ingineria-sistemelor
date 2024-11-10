@@ -1,0 +1,42 @@
+@startuml
+
+circle start
+agent "Main Page" as mainPage
+note left of mainPage: The main page (or starting page)is the page\nthat contains the map showing all available\nsport centers 
+
+agent "Account Management\nHomepage" as accHomeP
+note right of accHomeP: Contains a submenu for switching to\nsubsections
+
+agent "Login Page" as loginP
+agent "Create New Account Page" as newAccP
+
+agent "Reservations page" as resservP
+agent "Account details" as accDetP
+agent "Offered training page" as offTrainP
+
+agent "Sports center page" as sportsCenterP
+note top of sportsCenterP : Represents the page\nthat appears when a\nsports center is selected
+
+agent "Create Appointment Page" as crtAppP
+note bottom of crtAppP : The page where the user\ncreates an appointment
+
+hexagon "is user a trainer " as isUserTrainer
+hexagon "Is user\nauthenticated" as isUserAuthed
+
+start --> mainPage  
+mainPage --> isUserAuthed
+mainPage --> loginP
+isUserAuthed --> accHomeP : Yes
+loginP --> newAccP
+
+mainPage --> sportsCenterP : Yes
+sportsCenterP --> isUserAuthed
+isUserAuthed --> crtAppP : Yes
+isUserAuthed --> loginP : No
+
+accHomeP --> isUserTrainer
+accHomeP --> accDetP
+isUserTrainer --> offTrainP : Yes
+isUserTrainer --> resservP : No
+
+@endum

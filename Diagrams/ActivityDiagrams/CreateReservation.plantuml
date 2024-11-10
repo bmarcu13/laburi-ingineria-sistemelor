@@ -1,0 +1,31 @@
+@startuml CreateReservation
+
+start
+
+:Select sports center;
+note right
+Using the map or the search feature
+The sports center details page is visible
+end note
+if (User logged in) then (yes)
+    label sp0
+    label sp1
+    label sp2
+    label a
+    :Select desired sport;
+    if (Time slots available) then (yes)
+        :Select available date from the calendar;
+        :Select available time;
+        :Confirm reservation;
+    else 
+        ->no;
+    endif
+else
+    partition "activity **Login**" {
+        (.)
+    }
+    goto a
+endif
+stop
+
+@enduml

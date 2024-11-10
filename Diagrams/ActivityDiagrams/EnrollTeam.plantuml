@@ -1,0 +1,20 @@
+@startuml EnrollTeam
+
+start
+split
+    :Go to team finder page;
+    :Apply filters;
+    note left
+        Filters could include
+        * Sport
+        * Distance to sports center
+    end note
+split again
+    :Select sport center;
+    :Select sport;
+end split
+:Select desired team;
+:Enroll into team;
+stop
+
+@enduml

@@ -1,0 +1,19 @@
+@startuml CancelReservation
+start
+if (Is user logged in) then (yes)
+    label sp0   
+    label sp1
+    label sp2
+    label sp3
+    label a
+    :Open account page;
+    :Go to reservations section;
+    :Cancel desired reservation;
+else (no)
+    partition "activity **Login**" {
+        :;
+    }
+    goto a
+endif
+stop
+@enduml

@@ -1,0 +1,68 @@
+@startuml UseCaseDiagram
+
+left to right direction
+
+actor Guest
+
+' package "Authenticated User" as authedUser {
+    ' actor Client
+    ' actor Trainer 
+' } 
+
+package System {
+
+    package Accounts {
+        usecase "Create account" as createAcc
+        usecase Login
+        usecase Logout
+        usecase "Manage account" as manageAcc
+
+        Login .right.> createAcc : includes
+        Logout .up.> Login : includes
+        manageAcc .up.> Login : includes
+    }
+
+    ' package Reservations {
+    '     usecase "Create reservation" as createRes
+    '     usecase "Delete reservation" as delRes
+    '     usecase "View reservations" as viewRes
+
+    '     delRes .right.> createRes : includes
+    ' }
+
+
+    usecase "View sport\ncenters map" as viewCenters
+    usecase "View sport\ncenter details" as viewCenterDetails
+
+    ' package Training {
+    '     usecase "Create training\nsession" as addSession
+    '     usecase "Edit training\nsession" as editSession
+    '     usecase "Delete trainig\nsession" as deleteSession
+    '     usecase "View training\nsession" as viewSession
+
+    '     editSession ..> addSession : includes
+    '     deleteSession ..> addSession : includes
+    '     viewSession ..> addSession : includes
+    ' }
+
+    viewCenterDetails -right-|> viewCenters : extends
+
+}
+
+' authedUser --> Accounts
+Guest --> createAcc
+Guest --> Login
+
+' Client --> Accounts
+' Client --> Reservations
+
+' Client --> viewCenters
+Guest --> viewCenters
+' Client --> viewCenterDetails
+Guest --> viewCenterDetails
+
+' Trainer --> Accounts
+' Trainer --> Training
+
+
+@enduml

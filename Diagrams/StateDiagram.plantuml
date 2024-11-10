@@ -1,0 +1,27 @@
+@startuml
+
+[*] --> UnauthenticatedUser
+UnauthenticatedUser : User who hasn't logged in yet
+
+UnauthenticatedUser --> AuthenticatedUser : Login/Create Account
+AuthenticatedUser : User that has logged into their account
+AuthenticatedUser : Can either be a customer or trainer
+
+AuthenticatedUser --> ViewingSportsCenters : Use map/search
+AuthenticatedUser --> AccountManagement
+AuthenticatedUser --> UnauthenticatedUser : Log out
+AuthenticatedUser --> ReservationsManagement
+AuthenticatedUser --> FilteringSportCenters
+AuthenticatedUser --> FilteringTeams
+
+FilteringSportCenters --> ViewingSportsCenters
+
+FilteringTeams --> EnrollingInTeam
+
+ViewingSportsCenters --> MakingReservation
+ViewingSportsCenters --> AuthenticatedUser
+ViewingSportsCenters --> EnrollingInTeam
+
+
+
+@enduml
