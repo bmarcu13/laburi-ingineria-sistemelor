@@ -1,0 +1,27 @@
+@startuml CommunicationDiagram
+
+package WebApplication {
+    rectangle "User interface running\non the user device" as ui
+}
+
+package Backend {
+    rectangle "Authentication Service" as authServ
+    rectangle "Reservation Service" as resServ
+    rectangle "User Repository" as userRepo
+    rectangle "Sports Center Repository" as scRepo
+
+    ui <--> authServ : login()\nlogout()
+    authServ <--> userRepo : getById()
+
+    resServ <--> ui : makeReservation()\ncancelReservation()
+    scRepo <-up-> resServ : getById()
+}
+
+package Database {
+    database "Database" as db 
+
+    userRepo <--> db
+    scRepo <--> db
+}
+
+@enduml

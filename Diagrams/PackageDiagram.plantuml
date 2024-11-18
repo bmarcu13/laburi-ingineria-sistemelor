@@ -1,0 +1,12 @@
+@startuml PackageDiagram
+
+folder "Backend" as be {
+    folder Business {
+        folder Authentication
+        folder Reservation
+    }
+    package Presentation
+    package DataAccess
+}
+
+@enduml
